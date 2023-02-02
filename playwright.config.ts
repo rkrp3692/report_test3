@@ -10,6 +10,7 @@ import { devices } from '@playwright/test';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+
 const config: PlaywrightTestConfig = {
   testDir: './tests',
   /* Maximum time one test can run for. */
@@ -21,6 +22,21 @@ const config: PlaywrightTestConfig = {
      */
     timeout: 5000
   },
+
+
+  //Test Reporter
+  reporter: [
+    // ['list'],
+    // ['json', {  outputFile: 'test-results.json' }]
+    //  ['json', { outputFile: 'results.json' }]
+    // ['json', { outputFolder: 'C:\report_test1' }]
+
+    ['json', { outputFile: './report.json' }]
+
+  ],
+
+
+
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -51,19 +67,19 @@ const config: PlaywrightTestConfig = {
       },
     },
 
-    {
-      name: 'firefox',
-      use: {
-        ...devices['Desktop Firefox'],
-      },
-    },
+    // {
+    //   name: 'firefox',
+    //   use: {
+    //     ...devices['Desktop Firefox'],
+    //   },
+    // },
 
-    {
-      name: 'webkit',
-      use: {
-        ...devices['Desktop Safari'],
-      },
-    },
+    // {
+    //   name: 'webkit',
+    //   use: {
+    //     ...devices['Desktop Safari'],
+    //   },
+    // },
 
     /* Test against mobile viewports. */
     // {

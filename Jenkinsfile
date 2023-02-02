@@ -51,6 +51,7 @@ pipeline {
             success {
                 echo 'test success'
             }
+
         }
 
 }
