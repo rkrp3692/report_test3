@@ -25,6 +25,11 @@ pipeline {
             }
         }
 
+        post {
+            success {
+                echo 'test success'
+            }
+        }
 
 
         
