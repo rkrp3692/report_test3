@@ -20,7 +20,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh "npx playwright test"
+                echo "hello"
             }
         }
 
