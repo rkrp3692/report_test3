@@ -13,14 +13,15 @@ pipeline {
             steps {
                 git branch: 'master',
                 url: 'https://github.com/rkrp3692/report_test1.git'
-                sh "npm install"
+                // sh "npm install"
             }
         }
 
 
         stage('Test') {
             steps {
-                echo "hello"
+                sh 'npm install'
+                sh 'npx playwright test'
             }
         }
 
