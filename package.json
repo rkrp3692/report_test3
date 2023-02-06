@@ -4,12 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": ""
+    
+    "test": "tsc && cucumber-js features",
+    "test1": "cucumber-js -p test_runner features",
+    "test2": "cucumber-js -p test_runner --tags @test2",
+    "test3": "cucumber-js -p test_runner --format json:report.json --tags @test2"
+
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.30.0"
+    "@playwright/test": "^1.30.0",
+    "@types/chai": "^4.3.4",
+    "@types/cucumber": "^7.0.0",
+    "chai": "^4.3.7",
+    "cucumber": "^6.0.7"
   }
 }
+
+

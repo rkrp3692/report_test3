@@ -21,7 +21,8 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'npm install'
-                echo 'npx playwright test'
+                //echo 'npx playwright test'
+                echo 'npx cucumber-js -p test_runner --format json:report.json --tags " @test2"'
             }
         }
 

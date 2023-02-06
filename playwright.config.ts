@@ -30,9 +30,10 @@ const config: PlaywrightTestConfig = {
     // ['json', {  outputFile: 'test-results.json' }]
     //  ['json', { outputFile: 'results.json' }]
     // ['json', { outputFolder: 'C:\report_test1' }]
-
-    ['json', { outputFile: './report.json' }]
-
+    
+    ['list'],
+    ['json', { outputFile: './report.json' }],         //프로젝트 폴더에 Test Reporter .json 파일 생성
+    ['html', { outputFolder: 'HTML_Report' }]             //프로젝트에 Test Reporter HTML 파일 생성
   ],
 
 
@@ -46,7 +47,7 @@ const config: PlaywrightTestConfig = {
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  // reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
