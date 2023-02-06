@@ -28,24 +28,27 @@ pipeline {
         
     }
 
-    post {
+   
             // success {
             //     echo 'test success'
             // }
 
                 //def obj = readJSON file: 'report.json'
+                stage('Deploy')
+                {
+                    steps {
+                        def testIssue=[fields:[
+                            project:[key:'khnp'],
+                        summary:'Test Bug',
+                        description:'Test Bug',
+                        issuetype:[name:'Bug']
+                        ]]
+                        response=NewJiraIssue issue:testIssue, JIRA_URL:'https://jhxray.atlassian.net/'
+                        echo response.successful.toString()
+                        echo response.data.toString()
+                        }
+                        }
                 
-                def testIssue=[fields:[
-                    project:[key:'khnp'],
-                    summary:'Test Bug',
-                    description:'Test Bug',
-                    issuetype:[name:'Bug']
-                ]]
-                response=NewJiraIssue issue:testIssue, JIRA_URL:'https://jhxray.atlassian.net/'
-                echo response.successful.toString()
-                echo response.data.toString()
-
-            }
 
 // //Sample1
 // def jiraServer='https://jhxray.atlassian.net'
