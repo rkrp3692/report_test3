@@ -39,17 +39,23 @@ pipeline {
 
 
             failure {
-//Sample1
-def jiraServer='https://jhxray.atlassian.net'
-def testIssue=[fields:[
-    project:['key':'AUTO'],
-    summary:'Test Bug',
-    description:'Test Bug',
-    issuetype:[name:'Bug']]]
-    response=jiraNewIssue issue:testIssue, site:jiraServer
-    echo response.successful.toString()
-    echo response.data.toString()
-            }
+
+def data = readJSON(file: "report.json")
+
+
+
+// //Sample1
+// def jiraServer='https://jhxray.atlassian.net'
+// def testIssue=[fields:[
+//     project:['key':'AUTO'],
+//     summary:'Test Bug',
+//     description:'Test Bug',
+//     issuetype:[name:'Bug']]]
+//     response=jiraNewIssue issue:testIssue, site:jiraServer
+//     echo response.successful.toString()
+//     echo response.data.toString()
+
+//             }
 
 
 
