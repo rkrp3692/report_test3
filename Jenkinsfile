@@ -27,11 +27,12 @@ pipeline {
         }
 
 
-        stage('Deploy')
-                {
-                    steps {
-                        def testIssue=[fields:[
-                            project:[key:'khnp'],
+
+        stage('Deploy') {
+            steps {
+                script {
+                    def testIssue=[fields:[
+                        project:[key:'khnp'],
                         summary:'Test Bug',
                         description:'Test Bug',
                         issuetype:[name:'Bug']
@@ -41,9 +42,8 @@ pipeline {
                         echo response.data.toString()
                         }
                         }
-
-
-    }
+                        }
+                                
 
    
             // success {
