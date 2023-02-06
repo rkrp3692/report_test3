@@ -29,20 +29,14 @@ pipeline {
     }
 
     post {
-            success {
-                echo 'test success'
-            }
-
-
-
-
-
+            // success {
+            //     echo 'test success'
+            // }
 
             failure {
+                def data = readJSON(file: "report.json")
 
-def data = readJSON(file: "report.json")
-
-
+            }
 
 // //Sample1
 // def jiraServer='https://jhxray.atlassian.net'
@@ -118,6 +112,5 @@ def data = readJSON(file: "report.json")
 //   }
 // }
 
-        }
-
+}
 }
