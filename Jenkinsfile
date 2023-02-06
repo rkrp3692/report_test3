@@ -25,16 +25,9 @@ pipeline {
                 echo 'npx cucumber-js -p test_runner --format json:report.json --tags " @test2"'
             }
         }
-        
-    }
 
-   
-            // success {
-            //     echo 'test success'
-            // }
 
-                //def obj = readJSON file: 'report.json'
-                stage('Deploy')
+        stage('Deploy')
                 {
                     steps {
                         def testIssue=[fields:[
@@ -48,8 +41,18 @@ pipeline {
                         echo response.data.toString()
                         }
                         }
-                
 
+
+    }
+
+   
+            // success {
+            //     echo 'test success'
+            // }
+
+                //def obj = readJSON file: 'report.json'
+                
+            
 // //Sample1
 // def jiraServer='https://jhxray.atlassian.net'
 // def testIssue=[fields:[
