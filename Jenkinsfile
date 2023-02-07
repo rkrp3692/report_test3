@@ -1,5 +1,3 @@
-import groovy.lang.Binding;
-
 pipeline {
     agent any
     
@@ -52,16 +50,19 @@ pipeline {
             /*Create New Issue*/
             steps
             {
-                script{
+                script
+                {
                     def testIssue = [fields: [project: [key: 'KHNP'],
-                     summary: 'New Jira Create Issue Test',
+                    summary: 'New Jira Create Issue Test',
                     // description: 'Test',
                     issuetype: [id: '10011']]]
                     
-                     response = jiraNewIssue issue: createIssue, site: 'KHNP'
+                    // response = jiraNewIssue issue: createIssue, site: 'KHNP'
+                    response = jiraNewIssue issue: testIssue
+
                     echo response.successful.toString()
                     echo response.data.toString()
-
+                    
                 }
             }
 
