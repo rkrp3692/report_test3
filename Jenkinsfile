@@ -50,7 +50,16 @@ pipeline {
             /*Create New Issue*/
             steps
             {
-                jiraNewIssue site: 'https://jhxray.atlassian.net/jira/software/c/projects/KHNP'
+                script{
+                    def testIssue = [fields: [project: [key: 'KHNP'],
+                    summary: 'New Jira Create Issue Test',
+                    description: 'Test',
+                    issuetype: [id: '10011']]]
+                }
+                response = jiraNewIssue issue: testIssue, site: 'KHNP'
+
+                echo response.successful.toString()
+                echo response.data.toString()
             }
 
             /*Assign Issue*/
