@@ -56,8 +56,7 @@ pipeline {
                     // description: 'Test',
                     issuetype: [id: '10011']]]
                     
-                    // response = jiraNewIssue issue: testIssue, site: 'KHNP'
-                    response = jiraNewIssue issue: testIssue
+                     response = jiraNewIssue issue: createIssue, site: 'KHNP'
                     echo response.successful.toString()
                     echo response.data.toString()
 
