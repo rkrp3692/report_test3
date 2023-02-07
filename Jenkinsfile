@@ -36,15 +36,87 @@ pipeline {
 
                 script {
 
-                    def testIssue=[fields:[
-                        project:[key:'khnp'],
-                        summary:'Test Bug',
-                        description:'Test Bug',
-                        issuetype:[name:'Bug']
-                        ]]
-                        response=NewJiraIssue issue:testIssue, JIRA_URL:'https://jhxray.atlassian.net/'
-                        echo response.successful.toString()
-                        echo response.data.toString()
+                    // def testIssue=[fields:[
+                    //     project:[key:'khnp'],
+                    //     summary:'Test Bug',
+                    //     description:'Test Bug',
+                    //     issuetype:[name:'Bug']
+                    //     ]]
+                    //     response=NewJiraIssue issue:testIssue, JIRA_URL:'https://jhxray.atlassian.net/'
+                    //     echo response.successful.toString()
+                    //     echo response.data.toString()
+                    
+
+                    //.feature에서 XrayTestKey 받아옴
+                    def findXrayTestKey(def result_feature)
+                    {
+                        def featureFind = "file:scripts/features/1_(.+).feature"
+                        def matcher = result_feature?.uri =~ featureFind
+                        if(!matcher.asBoolean())
+                            return null
+                        return matcher.getAt(0).getAt(1)
+                    }
+                    
+                    
+                    
+                
+                    def getXrayTestStepsNotPassed(def reportJson){
+                        // 모든 feature 파일 loop
+                        println "--> getXrayTestStepsNotPassed "
+
+                        def status_passed = "passed"
+                        def result = []
+                        reportJson.each {
+                            feature ->
+                            def key = findXrayTestKey(feature)
+                            def id = findXrayTestId(key)
+                            def priorityId = findXrayTestPriority(key)
+
+                            // println "---> key " + key
+                            // println " id : " + id
+                            def item = [:]
+                            item["testKey"] = key;
+                            item["testId"] = id;
+                            item["testPriorityId"] = priorityId
+                            item["assigneeId"] = getXrayDefectAssigneeId()
+                            item["uri"] = feature.uri
+                            feature?.elements?.each {
+                            scenario ->
+                            item["scenario_name"] = scenario.name
+                            item["scenario_id"] = scenario.id
+                            item["line"] = scenario.line
+                            for( def step in scenario.steps){
+                                item["last_step_name"] =  step.name
+                                item["last_step_status"] =  step.result.status
+
+                            if(step.result.status != status_passed)
+                            {
+                                item["last_step_error_message"] =  step.result.error_message
+                                println "---> fail => key : " + key + " ,id : " + id 
+                                println " url : " + item["uri"]
+                                println " line : " + item["line"]
+                                break
+                            }
+                            }
+                            
+                            if( item["last_step_error_message"]) {
+                                result << item
+                                }
+                                }
+                                return item
+                                }
+                                println "----> steps not passed <---"
+                                println " fail size : " + result?.size()
+                                return result
+
+
+
+
+
+
+
+
+
                         }
 
                         }
