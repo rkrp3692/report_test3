@@ -58,7 +58,7 @@ pipeline {
                     issuetype: [id: '10011']]]
                     
                     // response = jiraNewIssue issue: createIssue, site: 'KHNP'
-                    response = jiraNewIssue issue: testIssue
+                    response = jiraNewIssue issue: testIssue, url: 'https://jhxray.atlassian.net/'
 
                     echo response.successful.toString()
                     echo response.data.toString()
