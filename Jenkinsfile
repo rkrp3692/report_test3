@@ -1,3 +1,5 @@
+import groovy.lang.Binding;
+
 pipeline {
     agent any
     
