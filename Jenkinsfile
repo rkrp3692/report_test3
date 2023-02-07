@@ -52,17 +52,19 @@ pipeline {
             {
                 script
                 {
+                    withEnv(['JIRA_SITE=KHNP'])
+                    {
                     def testIssue = [fields: [project: [key: 'KHNP'],
                     summary: 'New Jira Create Issue Test',
                     // description: 'Test',
                     issuetype: [id: '10011']]]
                     
                     // response = jiraNewIssue issue: createIssue, site: 'KHNP'
-                    response = jiraNewIssue issue: testIssue, url: 'https://jhxray.atlassian.net/'
+                    response = jiraNewIssue issue: testIssue
 
                     echo response.successful.toString()
                     echo response.data.toString()
-                    
+                    }
                 }
             }
 
