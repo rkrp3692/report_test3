@@ -52,8 +52,6 @@ pipeline {
             {
                 script
                 {
-                    withEnv(['JIRA_SITE=KHNP'])
-                    {
                     def testIssue = [fields: [project: [key: 'KHNP'],
                     summary: 'New Jira Create Issue Test',
                     // description: 'Test',
@@ -64,7 +62,6 @@ pipeline {
 
                     echo response.successful.toString()
                     echo response.data.toString()
-                    }
                 }
             }
 
