@@ -9,7 +9,7 @@ pipeline {
         // }
         
 
-        stage('build') {
+        stage('Build') {
             steps {
                 git branch: 'master',
                 url: 'https://github.com/rkrp3692/report_test1.git'
@@ -18,7 +18,7 @@ pipeline {
         }
 
 
-        stage('Test') {
+        stage('Test Run') {
             steps {
                 echo 'npm install'
                 //echo 'npx playwright test'
@@ -29,14 +29,50 @@ pipeline {
 
 
 
+        stage('Test Result') {
 
-        stage('Deploy') {
+            /*Cucumber reports*/
+            // steps 
+            // {
+            //     cucumber buildStatus: 'null', 
+            //     customCssFiles: '', 
+            //     customJsFiles: '', 
+            //     failedFeaturesNumber: -1, 
+            //     failedScenariosNumber: -1, 
+            //     failedStepsNumber: -1,
+            //     fileIncludePattern: '**/*.json', 
+            //     pendingStepsNumber: -1, 
+            //     skippedStepsNumber: -1, 
+            //     sortingMethod: 'ALPHABETICAL', 
+            //     undefinedStepsNumber: -1
+            // }
 
-            steps {
+            /*Create New Issue*/
+            steps
+            {
+                jiraNewIssue site: 'https://jhxray.atlassian.net/jira/software/c/projects/KHNP'
+            }
 
-                script {
+            /*Assign Issue*/
+            // steps
+            // {
+            //     jiraAssignIssue idOrKey: '', site: 'https://jhxray.atlassian.net/jira/software/c/projects/KHNP', userName: 'jh.jang'
+            // }
 
-                    // def testIssue=[fields:[
+            
+            // }
+
+
+
+
+
+                // script {
+                //     success {
+                //         echo 'test success'
+                //         }
+                //         def obj = readJSON file: 'report.json'
+                
+// def testIssue=[fields:[
                     //     project:[key:'khnp'],
                     //     summary:'Test Bug',
                     //     description:'Test Bug',
@@ -45,93 +81,9 @@ pipeline {
                     //     response=NewJiraIssue issue:testIssue, JIRA_URL:'https://jhxray.atlassian.net/'
                     //     echo response.successful.toString()
                     //     echo response.data.toString()
-                    
-
-                    //.feature에서 XrayTestKey 받아옴
-                    def findXrayTestKey(def result_feature)
-                    {
-                        def featureFind = "file:scripts/features/1_(.+).feature"
-                        def matcher = result_feature?.uri =~ featureFind
-                        if(!matcher.asBoolean())
-                            return null
-                        return matcher.getAt(0).getAt(1)
-                    }
-                    
-                    
-                    
-                
-                    def getXrayTestStepsNotPassed(def reportJson){
-                        // 모든 feature 파일 loop
-                        println "--> getXrayTestStepsNotPassed "
-
-                        def status_passed = "passed"
-                        def result = []
-                        reportJson.each {
-                            feature ->
-                            def key = findXrayTestKey(feature)
-                            def id = findXrayTestId(key)
-                            def priorityId = findXrayTestPriority(key)
-
-                            // println "---> key " + key
-                            // println " id : " + id
-                            def item = [:]
-                            item["testKey"] = key;
-                            item["testId"] = id;
-                            item["testPriorityId"] = priorityId
-                            item["assigneeId"] = getXrayDefectAssigneeId()
-                            item["uri"] = feature.uri
-                            feature?.elements?.each {
-                            scenario ->
-                            item["scenario_name"] = scenario.name
-                            item["scenario_id"] = scenario.id
-                            item["line"] = scenario.line
-                            for( def step in scenario.steps){
-                                item["last_step_name"] =  step.name
-                                item["last_step_status"] =  step.result.status
-
-                            if(step.result.status != status_passed)
-                            {
-                                item["last_step_error_message"] =  step.result.error_message
-                                println "---> fail => key : " + key + " ,id : " + id 
-                                println " url : " + item["uri"]
-                                println " line : " + item["line"]
-                                break
-                            }
-                            }
-                            
-                            if( item["last_step_error_message"]) {
-                                result << item
-                                }
-                                }
-                                return item
-                                }
-                                println "----> steps not passed <---"
-                                println " fail size : " + result?.size()
-                                return result
 
 
 
-
-
-
-
-
-
-                        }
-
-                        }
-
-                        }
-                                
-
-   
-            // success {
-            //     echo 'test success'
-            // }
-
-                //def obj = readJSON file: 'report.json'
-                
-            
 // //Sample1
 // def jiraServer='https://jhxray.atlassian.net'
 // def testIssue=[fields:[
@@ -144,11 +96,6 @@ pipeline {
 //     echo response.data.toString()
 
 //             }
-
-
-
-
-
 
 
 // Sample2
@@ -164,9 +111,6 @@ pipeline {
 //     sh('curl -D- -u $JIRA_CREDENTIALS -X POST --data "'+render+'" -H "Content-Type: application/json" $JIRA_URL/rest/api/2/issue)
     
 // }
-
-
-
 
 
 //Sample3
@@ -205,6 +149,4 @@ pipeline {
 //     }
 //   }
 // }
-        }
-    }
-}
+        // }
