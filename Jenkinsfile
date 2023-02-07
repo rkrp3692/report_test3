@@ -52,7 +52,7 @@ pipeline {
             {
                 script{
                     def testIssue = [fields: [project: [key: 'KHNP'],
-                    // summary: 'New Jira Create Issue Test',
+                     summary: 'New Jira Create Issue Test',
                     // description: 'Test',
                     issuetype: [id: '10011']]]
                     
