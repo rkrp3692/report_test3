@@ -56,8 +56,8 @@ pipeline {
                         project: [key: 'KHNP'],
                         summary: 'New Jira Create Issue Test',
                         // description: 'Test',
-                        // issuetype: [id: '10011']]]
-                        issuetype: [id: '3']]]
+                         issuetype: [id: '10011']]]
+                        // issuetype: [id: '3']]]
 
                         // response = jiraNewIssue issue: createIssue, site: 'KHNP'
                         // response = jiraNewIssue issue: testIssue, site: 'KHNP'
