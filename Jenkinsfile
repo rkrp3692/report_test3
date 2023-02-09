@@ -50,7 +50,7 @@ pipeline {
             /*Create New Issue*/
             steps
             {
-                //repository private 
+                //repository private        //SSH
                 bat 'curl -X GET -u jh.jang@tbell.co.kr:ATATT3xFfGF0ONz2jEppfMsVNELC_hQTwDWn8-8rXl9MH_a80hGmqD_RYBdaJv-rD8v3dWc25b01uS9jjy882U81smrJHRQ1UbWYMYTG4C_FUz2kpvDL-lY3Ctzpd4co2gAPv-jd02YUOSP2KVKY9xHmujpUy1ZITnZgoGU5Zd8_2kgwL3jEKeg=48B78938 -H "Content-Type: application/json" https://jhxray.atlassian.net//rest/api/latest/issue/KHNP-7'
 
                 // script
