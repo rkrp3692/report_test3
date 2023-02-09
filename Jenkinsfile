@@ -51,7 +51,7 @@ pipeline {
             steps
             {
                 //repository private        //SSH1
-                bat 'curl -X GET -u jh.jang@tbell.co.kr:ATATT3xFfGF0ONz2jEppfMsVNELC_hQTwDWn8-8rXl9MH_a80hGmqD_RYBdaJv-rD8v3dWc25b01uS9jjy882U81smrJHRQ1UbWYMYTG4C_FUz2kpvDL-lY3Ctzpd4co2gAPv-jd02YUOSP2KVKY9xHmujpUy1ZITnZgoGU5Zd8_2kgwL3jEKeg=48B78938 -H "Content-Type: application/json" https://jhxray.atlassian.net/rest/api/latest/issue/KHNP-7'
+                bat 'curl -X GET -u jh.jang@tbell.co.kr:ATATT3xFfGF0q-LGTDcf37974WhtIuf1QAvSU-8GTh36DMoz4gleSEXuqjr9hKs1RI-5QlEKjqkfJHOXXdSeZxuelSZfoXFI0F6_ozFq4FFF8d0AHx4LSSksY_KbltQT9DP4g7bZGYTUALArsMZZGlhWxyK_c2ZnbOqU4jS_1OIiOgsYjigYGUQ=4CA45D7F -H "Content-Type: application/json" https://jhxray.atlassian.net/rest/api/latest/issue/KHNP-7'
 
                 // script
                 // {
