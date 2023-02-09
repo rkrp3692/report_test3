@@ -76,48 +76,7 @@ pipeline {
 
                                 script
                                 {
-                                    def getPropertyFrom(String propertyFilename, def key, def defaultVal){
-
-                    def find = findProperty(key)
-                    if(find){
-                        return find
-                    }
-
-                    File propertyFileTmp = new File("tmp.properties")
-                    if(propertyFileTmp.exists()) {
-                        def propsTmp = new Properties()
-                        propsTmp.load(new FileReader(propertyFileTmp))
-                        find = propsTmp.getProperty(key)
-                        if (find) {
-                            return find
-                        }
-                    }
-
-                    File propertyFile = new File(propertyFilename)
-                    if(propertyFile.exists()) {
-                        def props = new Properties()
-                        props.load(new FileReader(propertyFile))
-                        find = props.getProperty(key)
-                        if (find) {
-                            return find
-                        }
-                    }
-
-                    return defaultVal
-                }
-                def setPropertyTo( String propertyFilename, def key, def value){
-                    File propertyFile = new File(propertyFilename)
-                    if(!propertyFile.exists()) {
-                        propertyFile.createNewFile()
-                    }
-
-                    def props = new Properties()
-                    props.load( new FileReader( propertyFile ))
-                    props.setProperty(key,value)
-                    props.store( propertyFile.newWriter (), null )
-                    return value    
-                }
-
+  
 
                 def getMaxLengthSummary(){
                     return 200
@@ -185,37 +144,6 @@ pipeline {
 
                 def getErrorScreenshotDir(){
                     return getCucumberProperty("cucumber_screenshotDir", "screenshots")
-                }
-
-                def findErrorScreenshot(def id){
-                    def screenshotName = getErrorScreenshotPrefix() + id.hashCode() + "_"
-                    println " --> findErrorScreenshot id : " + id
-                    println " --> findErrorScreenshot find filename : " + screenshotName
-
-                    File dirScreenshot = Paths.get(getErrorScreenshotDir())?.toFile()
-                    
-                    println " screnshot directory " + dirScreenshot.getAbsolutePath()
-                    if (!dirScreenshot.exists()) {
-                        dirScreenshot.mkdirs();
-                    }
-
-                    try{
-                        File[] files = dirScreenshot.listFiles(
-                                new FilenameFilter() {
-                                        @Override
-                                        public boolean accept(File file, String name) {
-                                            return name.startsWith(screenshotName);
-                                        }
-                                    }
-                        );
-                        println " files " + Arrays.toString(files)
-                        return files
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    return null;
                 }
 
                 def getXrayProperty(def key){
@@ -342,21 +270,6 @@ pipeline {
                     return getXrayProperty("xray_defect_assignee_id")
                 }
 
-                def getJiraProjectInfoFromMeta(def meta, def project_key){
-                    return meta.projects.find { it.key == project_key  }
-                }
-                def getJiraProjectIdFromMeta(def meta, def project_key){
-                    return getJiraProjectInfoFromMeta(meta, project_key)?.id
-                }
-
-
-                def getJiraIssuetypeInfoFromMeta(def meta, def project_key,  def issuetype_name){
-                    return getJiraProjectInfoFromMeta(meta, project_key)?.issuetypes.find { it.name == issuetype_name }
-                }
-                def getJiraIssuetypeIdFromMeta(def meta, def project_key, def issuetype_name){
-                    return getJiraIssuetypeInfoFromMeta(meta, project_key, issuetype_name)?.id
-                }
-
                 def getXrayErrorDetailUrl(def testExecIssueKey, def testIssueKey){
                     getJiraBaseUrl() + "/plugins/servlet/ac/com.xpandit.plugins.xray/execution-page?ac.testExecIssueKey=${testExecIssueKey}&ac.testIssueKey=${testIssueKey}"
                 }
@@ -469,50 +382,6 @@ pipeline {
                     return  resultJson
                 }
 
-                def addJiraIssueAttachment( String issueKey , File attachFile){
-
-
-                    println "----> AddJiraIssueAttachment"
-
-                    println "---> attachFile"
-                    println attachFile
-
-                    def uriBuilder = new URIBuilder(getJiraBaseUrl())
-                    uriBuilder.setPath("/rest/api/3/issue/${issueKey}/attachments")
-                    String url = uriBuilder.build();
-
-                    var HttpBuilder http = HttpBuilder.configure {
-                        request.uri = url
-                        request.headers['Authorization'] = getJiraApiAuth()
-                        request.headers['X-Atlassian-Token'] = 'no-check'
-                        request.headers['Accept'] = 'application/json'
-                        // request.contentType = 'application/json'
-                    };
-
-                    def resultJson
-                    http.post() {
-                        request.contentType = 'multipart/form-data'
-                        request.body = multipart {
-                            field 'name', 'This is my file'
-                            part 'file', attachFile.getName(), 'text/plain', attachFile
-                        }
-                        request.encoder 'multipart/form-data', OkHttpEncoders.&multipart
-
-                        response.success  { resp, json ->
-                            resultJson = json
-                        }
-
-                        response.failure { resp, json ->
-                            println json
-                            // t.printStackTrace()
-                            throw new RuntimeException("Error respone (${resp.statusCode}): ${json}")
-                        }
-                    }
-
-                    println "-->> issue create "
-                    println resultJson
-                    return  resultJson
-                }
 
                 def createXrayApiKey()  {
 
@@ -533,37 +402,6 @@ pipeline {
                     }
 
                     return  getXaryApiAuth()
-                }
-
-                def getXrayGraphql(def query){
-
-                    println "----> getqueryXrayGraphql"
-                    println query
-
-                    def uriBuilder = new URIBuilder("https://xray.cloud.getxray.app/api/v2/graphql")
-                    String url = uriBuilder.build();
-
-                    var HttpBuilder http = HttpBuilder.configure {
-                        request.uri = url
-                        request.headers['Authorization'] = createXrayApiKey()
-                        request.contentType = 'application/json'
-                    };
-
-                    def resultJson
-                    http.post() {
-                        request.body = query
-                        response.success  { resp, json ->
-                            resultJson = json
-                        }
-                    }
-
-                    if(resultJson.errors){
-                        println resultJson
-                        throw new Exception( JsonOutput.toJson(resultJson.errors) )
-                    }
-
-                    println resultJson
-                    return  resultJson
                 }
 
                 def getXaryPlanTests(def planIssueId){
@@ -604,39 +442,6 @@ pipeline {
                     return json.data.getTestPlans.results[0].tests.results.findAll{
                         it.testType.name == 'Cucumber'
                     }
-                }
-
-
-                def exportXrayCucumber(def issueKeys, def zipFilename ){
-
-                    println "--> exportXrayCucumber -> issueKeys : ${issueKeys}, zipFilename : ${zipFilename} "  
-
-                    def keys = issueKeys;
-                    if(isCollectionOrArray(issueKeys) ){
-                        keys = issueKeys.join(";")
-                    }
-                    println "==> exportXrayCucumber keys : " + keys
-                    def uriBuilder = new URIBuilder(getXrayBaseUrl())
-                    uriBuilder.setPath("/api/v2/export/cucumber")
-                    uriBuilder.addParameter("keys", keys)
-
-                    String url = uriBuilder.build();
-                    var HttpBuilder http = HttpBuilder.configure {
-                        request.uri = url
-                        request.headers['Authorization'] = getXaryApiAuth()
-                    };
-
-                    File dir = Paths.get(getScriptLoc()).toFile()
-                    if(!dir.exists()){
-                        dir.mkdirs()
-                    }
-                    println zipFilename
-                    File file = Paths.get(getScriptLoc(), zipFilename).toFile()
-                    http.get() {
-                        Download.toFile(delegate, file)
-                    }
-
-                    return  getXaryApiAuth()
                 }
 
                 def createTestExecution(def testIssueIds, def projectKey){
