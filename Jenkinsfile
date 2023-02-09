@@ -13,7 +13,8 @@ pipeline {
             steps {
                 git branch: 'master',
                 //url: 'https://github.com/rkrp3692/report_test1.git'
-                url: 'git@github.com:rkrp3692/report_cucumber_js_json_tag.git'
+                url: 'https://github.com/rkrp3692/report_cucumber_js_json_tag.git'
+                // url: 'git@github.com:rkrp3692/report_cucumber_js_json_tag.git'
                 // sh "npm install"
             }
         }
