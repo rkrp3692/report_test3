@@ -65,7 +65,7 @@ pipeline {
                         // response = jiraNewIssue issue: testIssue, site: 'LOCAL'
                         // response = jiraGetIssue idOrKey: 'KHNP-8', site: 'LOCAL'
 
-                        response = jiraGetComment idOrKey:'KHNP-7' ,site: 'LOCAL'
+                        response = jiraGetComment idOrKey:'jh.jang' ,site: 'LOCAL'
 
 
                         // response = jiraGetFields site: 'LOCAL'
