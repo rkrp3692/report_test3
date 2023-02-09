@@ -342,30 +342,6 @@ pipeline {
                     return getXrayProperty("xray_defect_assignee_id")
                 }
 
-                def getJiraCreateMeta(){
-                    println "----> getJiraCreateMeta"
-
-                    def uriBuilder = new URIBuilder(getJiraBaseUrl())
-                    uriBuilder.setPath("/rest/api/3/issue/createmeta")
-                    String url = uriBuilder.build();
-
-                    var HttpBuilder http = HttpBuilder.configure {
-                        request.uri = url
-                        request.headers['Authorization'] = getJiraApiAuth()
-                        request.contentType = 'application/json'
-                    }
-
-                    def resultJson = [:]
-                    http.get() {
-                        response.success  { resp, json ->
-                            resultJson = json
-                        }
-                    }
-
-
-                    return  resultJson
-                }
-
                 def getJiraProjectInfoFromMeta(def meta, def project_key){
                     return meta.projects.find { it.key == project_key  }
                 }
