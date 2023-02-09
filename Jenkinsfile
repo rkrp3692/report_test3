@@ -57,7 +57,7 @@ pipeline {
                         summary: 'New Jira Create Issue Test',
                         description: 'Test Bug',
                         //  issuetype: [id: '10011']]]
-                        issuetype:[name:'Bug']]]
+                        issuetype:[name:'Test']]]
                         // issuetype: [id: '3']]]
 
                         // response = jiraNewIssue issue: createIssue, site: 'KHNP'
