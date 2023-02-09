@@ -63,8 +63,7 @@ pipeline {
                         // response = jiraNewIssue issue: createIssue, site: 'KHNP'
                         // response = jiraNewIssue issue: testIssue, site: 'KHNP'
                         // response = jiraNewIssue issue: testIssue, site: 'LOCAL'
-                        response = jiraGetProject idOrKey: 'KHNP-5', site: 'LOCAL'
-
+                        response = jiraGetIssue idOrKey: 'KHNP-8', site: 'LOCAL'
                         echo response.successful.toString()
                         echo response.data.toString()
 
