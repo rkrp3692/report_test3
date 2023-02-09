@@ -12,7 +12,8 @@ pipeline {
         stage('Build') {
             steps {
                 git branch: 'master',
-                url: 'https://github.com/rkrp3692/report_test1.git'
+                //url: 'https://github.com/rkrp3692/report_test1.git'
+                url: 'git@github.com:rkrp3692/report_cucumber_js_json_tag.git'
                 // sh "npm install"
             }
         }
@@ -39,7 +40,7 @@ pipeline {
 
 
 
-                bat 'curl -H "Content-Type: application/json" -X POST --data @test.json -u jh.jang@tbell.co.kr:ATATT3xFfGF0q-LGTDcf37974WhtIuf1QAvSU-8GTh36DMoz4gleSEXuqjr9hKs1RI-5QlEKjqkfJHOXXdSeZxuelSZfoXFI0F6_ozFq4FFF8d0AHx4LSSksY_KbltQT9DP4g7bZGYTUALArsMZZGlhWxyK_c2ZnbOqU4jS_1OIiOgsYjigYGUQ=4CA45D7F https://jhxray.atlassian.net/rest/api/2/issue/KHNP-13'
+                bat 'curl -H "Content-Type: application/json" -X POST --data @report.json -u jh.jang@tbell.co.kr:ATATT3xFfGF0q-LGTDcf37974WhtIuf1QAvSU-8GTh36DMoz4gleSEXuqjr9hKs1RI-5QlEKjqkfJHOXXdSeZxuelSZfoXFI0F6_ozFq4FFF8d0AHx4LSSksY_KbltQT9DP4g7bZGYTUALArsMZZGlhWxyK_c2ZnbOqU4jS_1OIiOgsYjigYGUQ=4CA45D7F https://jhxray.atlassian.net/rest/api/2/issue/KHNP-13'
 
 
 
