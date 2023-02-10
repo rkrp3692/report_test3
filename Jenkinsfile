@@ -6,6 +6,11 @@ pipeline {
         stage('Build') {
             steps {
                 git branch: 'master', credentialsId: '33b66731-ce0f-450a-ba67-8fb189398b47', url: 'git@github.com:rkrp3692/report_test3.git'
+
+                success {
+                    echo 'Build Success'
+                }
+
             }
         }
 
@@ -14,6 +19,11 @@ pipeline {
                 echo 'npm install'
                 //echo 'npx playwright test'
                 echo 'npx cucumber-js -p test_runner --format json:report.json --tags " @test2"'
+                
+                success {
+                    echo 'Test Run Success'
+                }
+
             }
         }
 
@@ -59,6 +69,12 @@ pipeline {
                 // bat 'curl -D- -u jh.jang@tbell.co.kr:ATATT3xFfGF0q-LGTDcf37974WhtIuf1QAvSU-8GTh36DMoz4gleSEXuqjr9hKs1RI-5QlEKjqkfJHOXXdSeZxuelSZfoXFI0F6_ozFq4FFF8d0AHx4LSSksY_KbltQT9DP4g7bZGYTUALArsMZZGlhWxyK_c2ZnbOqU4jS_1OIiOgsYjigYGUQ=4CA45D7F -X POST --data {"fields": {"project":{"key": "KHNP"},"summary": "Create Issue Test","description": "Test","issuetype": {"name": "Bug"}}} -H "Content-Type: application/json" https://jhxray.atlassian.net/rest/api/2/issue'
             
                 // }
+
+
+                success {
+                    echo 'Test Result Success'
+                }
+
 
             }
         }
