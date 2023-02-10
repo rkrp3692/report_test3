@@ -7,10 +7,10 @@ pipeline {
             steps {
                 git branch: 'master', credentialsId: '33b66731-ce0f-450a-ba67-8fb189398b47', url: 'git@github.com:rkrp3692/report_test3.git'
 
-                if (success) {
-                    echo 'Build Success'
-                }
-                else {
+                // success {
+                //     echo 'Build Success'
+                // }
+                failure {
                     echo 'Build Failed'
                 }
 
@@ -23,10 +23,10 @@ pipeline {
                 //echo 'npx playwright test'
                 echo 'npx cucumber-js -p test_runner --format json:report.json --tags " @test2"'
                 
-                if (success) {
-                    echo 'Test Run Success'
-                }
-                else {
+                // success {
+                //     echo 'Test Run Success'
+                // }
+                failure {
                     echo 'Test Run Failed'
                 }
 
@@ -77,10 +77,10 @@ pipeline {
                 // }
 
 
-                if(success) {
-                    echo 'Test Result Success'
-                } 
-                else {
+                // success {
+                //     echo 'Test Result Success'
+                // } 
+                failure {
                     echo 'Test Result Failed'
                 }
 
