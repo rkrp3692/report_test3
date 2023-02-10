@@ -34,8 +34,9 @@ pipeline {
       
                 def jiraServer = 'https://jhxray.atlassian.net'
                 def testIssue = [fields:[
-                    project:['key':'KHNP'],
-                    issuetype:[name:'Bug']
+                    // project:['key':'KHNP'],
+                    project:['name':'KHNP'],
+                    issuetype:[name:'Bug'],
                 ]]
     
                 response = jiraNewIssue issue: testIssue,site: jiraServer
