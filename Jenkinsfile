@@ -18,7 +18,7 @@ pipeline {
                 // sh "npm install"
 
 
-                git branch: 'master', url:'git@github.com:rkrp3692/report_cucumber_js_json_tag.git'
+                git branch: 'master', url:'git@github.com:rkrp3692/report_test3.git'
                 // script{
                 //     // git 'https://github.com/leeseok0916/jenkinsTest.git'
                 //      git branch: 'master', url:'git@github.com:rkrp3692/report_cucumber_js_json_tag.git'
