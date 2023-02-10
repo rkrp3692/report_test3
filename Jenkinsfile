@@ -1,26 +1,3 @@
-import groovy.json.JsonOutput
-
-
-def body = [
-    title: "title",
-    body: "body",
-    head: "develop",
-    base: "master"
-]
-
-// Http Request 플러그인 필요
-def result = httpRequest(
-    httpMode: "GET",
-    url: "https://jhxray.atlassian.net/rest/api/3/issue/KHNP-3",
-    contentType: "application/json",
-    customHeaders: [[name: "Authorization", value: "token ATATT3xFfGF0QBaYeE2GO2PiYpJ0ifuGAdLfJBY9_k7NM-cSStakofAGheJ5TjwMs3nZ4IRaCkGme1JRjK6TjkNlCs4FvG2xk02j8iSk6NmWrlfGjPUHJ8WAP1vUAN4txIogRVNG_PxwH05ilNdbTfTJSIxVkjP39bOM-V4lOqSwq4BO8jcztU0=16C25777"]],
-    consoleLogResponseBody: true,
-    requestBody: JsonOutput.toJson(body),  // JsonOutput은 한글 깨짐 현상이 발생하므로 주의
-    timeout: 5000
-)
-
-
-
 pipeline {
     agent any
 
@@ -44,7 +21,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 // bat 'curl -H "Content-Type: application/json" -X POST --data @report.json  -u jh.jang:ATATT3xFfGF0QBaYeE2GO2PiYpJ0ifuGAdLfJBY9_k7NM-cSStakofAGheJ5TjwMs3nZ4IRaCkGme1JRjK6TjkNlCs4FvG2xk02j8iSk6NmWrlfGjPUHJ8WAP1vUAN4txIogRVNG_PxwH05ilNdbTfTJSIxVkjP39bOM-V4lOqSwq4BO8jcztU0=16C25777 https://jhxray.atlassian.net/rest/api/3/issue'
-                result.getStatus();
+                httpRequest(consoleLogResponseBody: true,
+                contentType: 'application/json',
+                httpMode: 'POST',
+                requestBody: command,
+                url: 'https://jhxray.atlassian.net/rest/api/3/issue')
             }
         }
 
