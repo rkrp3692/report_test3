@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                git url: 'git@github.com:rkrp3692/report_test3.git', branch: 'master'
+                git url: 'https://github.com/rkrp3692/report_test3.git', branch: 'master'
                 // echo 'Building..'
             }
         }
