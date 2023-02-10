@@ -4,18 +4,19 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                git url: 'git@github.com:rkrp3692/report_test3.git', branch: 'master'
+                // echo 'Building..'
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+        // stage('Test') {
+        //     steps {
+        //         // echo 'Testing..'
+        //     }
+        // }
+        // stage('Deploy') {
+        //     steps {
+        //         // echo 'Deploying....'
+        //     }
+        // }
     }
 }
