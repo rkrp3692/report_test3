@@ -1,13 +1,12 @@
 pipeline {
     agent any
-    
     stages {
- 
         stage('Build') {
             steps {
                 // git branch: 'master', credentialsId: '33b66731-ce0f-450a-ba67-8fb189398b47', url: 'git@github.com:rkrp3692/report_test3.git'
-                git 'git@github.com:rkrp3692/report_test3.git'
-
+                // git 'git@github.com:rkrp3692/report_test3.git'
+                
+                git branch: 'master', credentialsId: 'private_repository', url: 'https://github.com/rkrp3692/report_test3.git'
             }
 
                 // success {
