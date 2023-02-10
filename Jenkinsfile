@@ -37,9 +37,9 @@ pipeline {
                      project:['key':'KHNP'],
                     issuetype:[name:'Bug'],
                 ]]
-                def name = 'KHNP'
+                def jiraName = 'KHNP'
     
-                response = jiraNewIssue issue: testIssue,site: jiraServer,name: KHNP
+                response = jiraNewIssue issue: testIssue,site: jiraServer,name: jiraName
                 echo response.successful.toString()
                 echo response.data.toString()
 
