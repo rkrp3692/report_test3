@@ -25,9 +25,8 @@ pipeline {
                script {
                 def response = httpRequest responseHandle: 'NONE', url: 'https://jhxray.atlassian.net/rest/api/3/issue', wrapAsMultipart: false
                 def json = readJSON(text: response.content)
-                
+                }
             }
         }
-
     }
 }
