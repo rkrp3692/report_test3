@@ -6,7 +6,7 @@ pipeline {
                 // git branch: 'master', credentialsId: '33b66731-ce0f-450a-ba67-8fb189398b47', url: 'git@github.com:rkrp3692/report_test3.git'
                 // git 'git@github.com:rkrp3692/report_test3.git'
                 
-                git branch: 'master', credentialsId: 'private_repository', url: 'https://github.com/rkrp3692/report_test3.git'
+                git branch: 'master', credentialsId: '2DB6FE1626014FCB944DB4F53E101976/******', url: 'https://github.com/rkrp3692/report_test3.git'
             }
 
                 // success {
