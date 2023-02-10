@@ -35,10 +35,11 @@ pipeline {
                 ]]]
                 }
 
-                 response = jiraNewIssue issue:testIssue,url:'https://jhxray.atlassian.net'
-                 echo 'test'
-
                 }
+
+                response = jiraNewIssue issue:testIssue,url:'https://jhxray.atlassian.net'
+                echo 'test'
+
             }
         }
     }
