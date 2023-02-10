@@ -35,8 +35,8 @@ pipeline {
                 def testIssue = [fields:[
                     project:['key':'KHNP'],
                     issuetype:[name:'Bug'],
-                    summary: [summary: 'test1'],
-                    description: [description: 'test1']
+                    summary: 'test1',
+                    description: 'test1'
                 ]]
   
                 response = jiraNewIssue issue: testIssue, site: jiraServer
