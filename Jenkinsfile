@@ -21,11 +21,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 // bat 'curl -H "Content-Type: application/json" -X POST --data @report.json  -u jh.jang:ATATT3xFfGF0QBaYeE2GO2PiYpJ0ifuGAdLfJBY9_k7NM-cSStakofAGheJ5TjwMs3nZ4IRaCkGme1JRjK6TjkNlCs4FvG2xk02j8iSk6NmWrlfGjPUHJ8WAP1vUAN4txIogRVNG_PxwH05ilNdbTfTJSIxVkjP39bOM-V4lOqSwq4BO8jcztU0=16C25777 https://jhxray.atlassian.net/rest/api/3/issue'
-                httpRequest(consoleLogResponseBody: true,
-                contentType: 'APPLICATION_JSON',
-                httpMode: 'POST',
-                requestBody: command,
-                url: 'https://jhxray.atlassian.net/rest/api/3/issue')
+               
+                def response = httpRequest responseHandle: 'NONE', url: 'https://jhxray.atlassian.net/rest/api/3/issue', wrapAsMultipart: false
+                def json = readJSON(text: response.content)
+
             }
         }
 
