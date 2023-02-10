@@ -32,14 +32,13 @@ pipeline {
                 // def json = readJSON(text: response.content)
 
       
-                def jiraServer = 'https://jhxray.atlassian.net'
+                def jiraServer = 'https://jhxray.atlassian.net/jira/software/c/projects/KHNP'
                 def testIssue = [fields:[
                      project:['key':'KHNP'],
                     issuetype:[name:'Bug'],
                 ]]
-                def jiraName = 'KHNP'
-    
-                response = jiraNewIssue issue: testIssue,site: jiraServer,name: jiraName
+  
+                response = jiraNewIssue issue: testIssue,site: jiraServer
                 echo response.successful.toString()
                 echo response.data.toString()
 
