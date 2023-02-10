@@ -28,8 +28,8 @@ pipeline {
                 // bat 'curl -H "Content-Type: application/json" -X POST --data @report.json -u jh.jang@tbell.co.kr:ATATT3xFfGF0q-LGTDcf37974WhtIuf1QAvSU-8GTh36DMoz4gleSEXuqjr9hKs1RI-5QlEKjqkfJHOXXdSeZxuelSZfoXFI0F6_ozFq4FFF8d0AHx4LSSksY_KbltQT9DP4g7bZGYTUALArsMZZGlhWxyK_c2ZnbOqU4jS_1OIiOgsYjigYGUQ=4CA45D7F https://jhxray.atlassian.net/rest/api/2/issue/KHNP-13'
 
 
-                script
-                {
+                // script
+                // {
                     // def testIssue = [fields: [
                     //     project: [key: 'KHNP'],
                     //     summary: 'New Jira Create Issue Test',
@@ -58,7 +58,7 @@ pipeline {
                 //Sample Code
                 bat 'curl -D- -u jh.jang@tbell.co.kr:ATATT3xFfGF0q-LGTDcf37974WhtIuf1QAvSU-8GTh36DMoz4gleSEXuqjr9hKs1RI-5QlEKjqkfJHOXXdSeZxuelSZfoXFI0F6_ozFq4FFF8d0AHx4LSSksY_KbltQT9DP4g7bZGYTUALArsMZZGlhWxyK_c2ZnbOqU4jS_1OIiOgsYjigYGUQ=4CA45D7F -X POST --data {"fields": {"project":{"key": "KHNP"},"summary": "Create Issue Test","description": "Test","issuetype": {"name": "Bug"}}} -H "Content-Type: application/json" https://jhxray.atlassian.net/rest/api/2/issue'
             
-                }
+                // }
 
             }
         }
