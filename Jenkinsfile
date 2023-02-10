@@ -24,16 +24,23 @@ pipeline {
                
                script {
 
-                def testIssue = [fields: [project: [id: '10000'],
-                                        summary: 'New Jira Create',
-                                        description: 'New Jira Create',
-                                        issuetype: [id: '3']]]
+                // def testIssue = [fields: [project: [id: '10000'],
+                //                         summary: 'New Jira Create',
+                //                         description: 'New Jira Create',
+                //                         issuetype: [id: '3']]]
+                // def response = httpRequest responseHandle: 'NONE', url: 'https://jhxray.atlassian.net/rest/api/3/issue', wrapAsMultipart: false, contenType: 'APPLICATION_JSON', requestBody: 'testIssue'
+                // def json = readJSON(text: response.content)
 
 
-                def response = httpRequest responseHandle: 'NONE', url: 'https://jhxray.atlassian.net/rest/api/3/issue', wrapAsMultipart: false, contenType: 'APPLICATION_JSON', requestBody: 'testIssue'
-                def json = readJSON(text: response.content)
+                def uriBuilder = new URIBuilder(getXrayBaseUrl())
+                uriBuilder.setPath("/api/v2/import/execution/cucumber")
+                String url = uriBuilder.build();
+                println url
+
+
+                }
+
                 }
             }
         }
     }
-}
