@@ -32,13 +32,10 @@ pipeline {
                 // def json = readJSON(text: response.content)
 
                 def testIssue = [fields: [project: [key: "KHNP" 
-
                 ]]]
-
-
-
-
                 }
+
+                echo 'test'
 
                 }
             }
