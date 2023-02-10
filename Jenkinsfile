@@ -31,15 +31,13 @@ pipeline {
                 // def response = httpRequest responseHandle: 'NONE', url: 'https://jhxray.atlassian.net/rest/api/3/issue', wrapAsMultipart: false, contenType: 'APPLICATION_JSON', requestBody: 'testIssue'
                 // def json = readJSON(text: response.content)
 
-      
-                def jiraServer = 'https://jhxray.atlassian.net'
+    
                 def testIssue = [fields:[
                     project:['key':'KHNP'],
-                    issuetype:[name:'Bug'],
-                    summary: [summary:'Test1']
+                    issuetype:[name:'Bug']
                 ]]
   
-                response = jiraNewIssue issue: testIssue,site: jiraServer
+                response = jiraNewIssue issue: testIssue
                 echo response.successful.toString()
                 echo response.data.toString()
 
