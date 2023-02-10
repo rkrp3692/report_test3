@@ -31,11 +31,11 @@ pipeline {
                 // def response = httpRequest responseHandle: 'NONE', url: 'https://jhxray.atlassian.net/rest/api/3/issue', wrapAsMultipart: false, contenType: 'APPLICATION_JSON', requestBody: 'testIssue'
                 // def json = readJSON(text: response.content)
 
+                def testIssue = [fields: [project: [key: "KHNP" 
 
-                def uriBuilder = new URIBuilder(getXrayBaseUrl())
-                uriBuilder.setPath("/api/v2/import/execution/cucumber")
-                String url = uriBuilder.build();
-                println url
+                ]]]
+
+
 
 
                 }
