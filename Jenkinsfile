@@ -18,7 +18,8 @@ pipeline {
                 // sh "npm install"
 
                 script{
-                    git branch: 'master', credentialsId: 'rkrp3692', url:'git@github.com:rkrp3692/report_cucumber_js_json_tag.git'
+                     git branch: 'master', url:'git@github.com:rkrp3692/report_cucumber_js_json_tag.git'
+                    // git credentialsId: '33b66731-ce0f-450a-ba67-8fb189398b47', url: 'git@github.com:rkrp3692/report_test3.git'
                 }
 
             }
