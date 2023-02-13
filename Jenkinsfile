@@ -53,7 +53,7 @@ pipeline {
                     description: 'test1'
                 ]]
   
-                response = jiraNewIssue issue: testIssue, site: jiraServer, 
+                response = jiraNewIssue issue: testIssue, site: jiraServer
                 echo response.successful.toString()
                 echo response.data.toString()
 
