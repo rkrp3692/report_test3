@@ -46,14 +46,12 @@ pipeline {
                 //Build Success Code
                 def jiraServer = 'khnp'
                 def testIssue = [fields:[
-                    project:[key:'KHNP'],
+                    project:[key:'KHNP-13'],
                     issuetype:[name:'Bug'],
                     summary: 'test1',
                     description: 'test1'
                 ]]
   
-                echo jiraServer.data.toString()
-
                 response = jiraNewIssue issue: testIssue, site: jiraServer
                 echo response.successful.toString()
                 echo response.data.toString()
