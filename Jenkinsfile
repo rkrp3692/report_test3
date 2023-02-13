@@ -1,7 +1,8 @@
-pipeline {
-    agent any
+// pipeline {
+node{
+    // agent any
 
-    stages {
+    // stages {
 
         stage('Build') {
             steps {
@@ -47,13 +48,13 @@ pipeline {
                 def jiraServer = 'khnp'
                 def testIssue = [fields:[
                     // project:[key:'KHNP'],
-                    project:[id:10003],
+                    project:[id:'10003'],
                     issuetype:[name:'Bug'],
                     summary: 'test1',
                     description: 'test1'
                 ]]
   
-                response = jiraNewIssue issue: testIssue, site: jiraServer
+                response = jiraNewIssue issue: testIssue, site: jiraServer, 
                 echo response.successful.toString()
                 echo response.data.toString()
 
@@ -64,4 +65,4 @@ pipeline {
         }
     }
     }
-}
+// }
