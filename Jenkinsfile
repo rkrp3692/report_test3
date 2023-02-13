@@ -41,6 +41,9 @@ pipeline {
                 // def isExists = fileExists("test.json")
 
                 def data1 = readJSON(file: "report.json")
+                echo data1.successful.toString()
+                echo data1.data.toString()
+
 
                 def jiraServer = 'khnp'
                 def testIssue = [fields:[
