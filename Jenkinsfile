@@ -31,6 +31,17 @@ pipeline {
                 // def response = httpRequest responseHandle: 'NONE', url: 'https://jhxray.atlassian.net/rest/api/3/issue', wrapAsMultipart: false, contenType: 'APPLICATION_JSON', requestBody: 'testIssue'
                 // def json = readJSON(text: response.content)
 
+                //writeJSON
+                // writeJSON(file:"report.json",json:"{message: 'Hello World'}",pretty:4)
+                //findFiles
+                // def files = findFiles(
+                //     glob: "**/*.json"
+                // )
+                //fileExists
+                // def isExists = fileExists("test.json")
+
+                def data1 = readJSON(file: "report.json")
+
                 def jiraServer = 'khnp'
                 def testIssue = [fields:[
                     project:[key:'KHNP'],
