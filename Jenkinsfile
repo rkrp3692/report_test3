@@ -39,23 +39,38 @@ pipeline {
                 // )
                 //fileExists
                 // def isExists = fileExists("test.json")
-
-                def data1 = readJSON(file: "report.json")
-                echo data1.successful.toString()
-                echo data1.data.toString()
+                // def data1 = readJSON(file: "report.json")
 
 
-                def jiraServer = 'khnp'
-                def testIssue = [fields:[
+
+                //Build Success Code
+                // def jiraServer = 'khnp'
+                // def testIssue = [fields:[
+                //     project:[key:'KHNP'],
+                //     issuetype:[name:'Bug'],
+                //     summary: 'test1',
+                //     description: 'test1'
+                // ]]
+  
+                // response = jiraNewIssue issue: testIssue, site: jiraServer
+                // echo response.successful.toString()
+                // echo response.data.toString()
+
+
+            
+                withEnv(["JIRA_SITE=khnp"]){
+                    def testIssue = [fields:[
                     project:[key:'KHNP'],
                     issuetype:[name:'Bug'],
                     summary: 'test1',
                     description: 'test1'
                 ]]
-  
-                response = jiraNewIssue issue: testIssue, site: jiraServer
-                echo response.successful.toString()
+                def response = jiraNewIssue issue: testIssue
                 echo response.data.toString()
+                }
+
+
+
 
             }
         }
