@@ -44,35 +44,24 @@ pipeline {
 
 
                 //Build Success Code
-                // def jiraServer = 'khnp'
-                // def testIssue = [fields:[
-                //     project:[key:'KHNP'],
-                //     issuetype:[name:'Bug'],
-                //     summary: 'test1',
-                //     description: 'test1'
-                // ]]
-  
-                // response = jiraNewIssue issue: testIssue, site: jiraServer
-                // echo response.successful.toString()
-                // echo response.data.toString()
-
-
-            
-                withEnv(["JIRA_SITE=khnp"]){
-                    def testIssue = [fields:[
+                def jiraServer = 'khnp'
+                def testIssue = [fields:[
                     project:[key:'KHNP'],
                     issuetype:[name:'Bug'],
                     summary: 'test1',
                     description: 'test1'
                 ]]
-                def response = jiraNewIssue issue: testIssue
+  
+                echo jiraServer
+
+                response = jiraNewIssue issue: testIssue, site: jiraServer
+                echo response.successful.toString()
                 echo response.data.toString()
-                }
 
 
-
-
+    
             }
+            
         }
     }
     }
